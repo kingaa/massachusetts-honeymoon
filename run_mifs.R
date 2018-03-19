@@ -1,8 +1,9 @@
 #######################################################################################################
 # Script example of maximum iterated filtering
 # The search was initiated from 1e2 starting parameter sets, sampled within the confidence intervals
-# of the traj-matched estimates
-# To save time, this script runs a single estimation, with a single MIF iteration
+# of the trajectory matching
+# To save time, this script runs a single estimation, with 2 MIF iterations
+# CAUTION: the data used in this script are NOT the real data, but synthetic data simulated with the best model
 #######################################################################################################
 
 rm(list=ls())
@@ -21,6 +22,7 @@ library(pomp)
 print(packageVersion("pomp")) # Should be 1.2.1.1
 source("create_pomp_model.R") # Source function that creates the pomp object
 model <- "WV" # Model to be estimated; SIR: no loss; WV: waning; LV: leaky vaccine; LV_WV: leaky+waning model
+theme_set(theme_bw())
 
 # Create age categories and data ------------------------------------------
 # Age classes in the model
@@ -30,7 +32,8 @@ agecats_mod <- c("[0,0.33)", "[0.33,1)", "[1,5)", "[5,10)", "[10,15)",
 nages_mod <- length(agecats_mod) # 17 age classes
 
 # Load monthly case reports, 1990--2005 (16 * 12 = 192 time points)
-data_month <- readRDS("data.rds")
+# These are simulated data from the waning model
+data_month <- readRDS("simulated_data.rds")
 
 # Fix model parameters --------------------------------------------------------
 nbasis <- 3L # No of periodic spline bases for seasonal functions

@@ -1,8 +1,9 @@
-#######################################################################################################
+#############################################################################################################
 # Script example of trajectory matching 
 # The broad search was initiated from 1e4 starting parameter sets, with maximum execution time of 20 min
 # for each estimation
 # To save time, this script runs a single estimation, with maximum execution time of 1 min
+# CAUTION: the data used in this script are NOT the real data, but synthetic data simulated with the best model
 #######################################################################################################
 
 rm(list=ls())
@@ -30,7 +31,7 @@ agecats_mod <- c("[0,0.33)", "[0.33,1)", "[1,5)", "[5,10)", "[10,15)",
 nages_mod <- length(agecats_mod) # 17 age classes
 
 # Load data
-data_month <- readRDS("data.rds")
+data_month <- readRDS("simulated_data.rds")
 
 # Fix model parameters --------------------------------------------------------
 nbasis <- 3L # No of periodic spline bases for seasonal functions
@@ -137,10 +138,11 @@ for(i in 1:1){
                        xtol_rel = 0.0,
                        print_level = 0))
   )
-  
-  # Display results
-  print(tm$solution) # Parameters on the estimation scale
-  print(-tm$objective) # Likelihood
+  if(!inherits(tm, "try-error")) {
+    # Display results
+    print(tm$solution) # Parameters on the estimation scale
+    print(-tm$objective) # Likelihood
+  }
 }
 
 #######################################################################################################

@@ -7,6 +7,9 @@ This repository contains saved the **R** objects (`.rds`) and **R** scripts (`.R
 Next, run the script `install_packages.R`;
 it installs the "checkpoint" package (if needed) and the other required packages at their version on 1 October 2015.
 (In particular, this ensures that the **pomp** package version is 1.2.1.1)
+Please note that the estimations are based on synthetic data, simulated from the waning stochastic model.
+This is because we were not allowed by the Massachusetts Department of Public Health (MDPH) to make their data public.
+The real data are available from the MDPH upon request to the Office of Integrated Surveillance and Informatic Services help desk (isishelp@state.ma.us). 
 
 The main scripts are then:
 
@@ -19,7 +22,7 @@ Other items:
 
 1. **R** objects:
      - `covars.rds`: data frame containing the covariates used in the model (birth and age-specific migration rates)
-     - `data.rds`: data frame that contains the data, i.e., monthly age-specific case reports in Massachusetts during 1990–2005
+     - `simulated_data.rds`: data frame that contains the simulated data, i.e., monthly age-specific case reports during 1990–2005
      - `mle_waning_model_deterministic.rds`: named vector containing the model parameters (fixed+estimated MLE) of the deterministic model
      - `mle_waning_model_stochastic.rds`: named vector containing the model parameters (fixed+estimated MLE) of the stochastic model
 2. Other files:
